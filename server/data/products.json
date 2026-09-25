@@ -1,0 +1,68 @@
+[
+  {
+    "id": "f74366bd-a499-488b-a05c-ce3692502709",
+    "name": "Gold Filigree Necklace",
+    "category": "jewelry",
+    "subcategory": "necklaces",
+    "price": 4500,
+    "description": "Delicate 18k gold filigree necklace, handcrafted.",
+    "image": null,
+    "featured": true,
+    "createdAt": "2026-09-25T03:28:59.439Z"
+  },
+  {
+    "id": "013de23c-90d7-4765-a58b-9450ef69c11b",
+    "name": "Diamond Solitaire Ring",
+    "category": "jewelry",
+    "subcategory": "rings",
+    "price": 18500,
+    "description": "Classic solitaire with 0.5ct brilliant cut diamond.",
+    "image": null,
+    "featured": true,
+    "createdAt": "2026-09-25T03:28:59.840Z"
+  },
+  {
+    "id": "4f1ff408-6cd2-4716-af98-bf620d251cfc",
+    "name": "Pearl Drop Earrings",
+    "category": "jewelry",
+    "subcategory": "earrings",
+    "price": 2800,
+    "description": "Lustrous freshwater pearl drop earrings in 14k gold.",
+    "image": null,
+    "featured": true,
+    "createdAt": "2026-09-25T03:28:59.840Z"
+  },
+  {
+    "id": "179eb794-fa4f-4ea2-8113-ea96059eff84",
+    "name": "Cross Pendant",
+    "category": "jewelry",
+    "subcategory": "pendants",
+    "price": 3200,
+    "description": "Sterling silver cross pendant with fine engraving.",
+    "image": null,
+    "featured": true,
+    "createdAt": "2026-09-25T03:28:59.840Z"
+  },
+  {
+    "id": "89859595-bccc-4d63-b7f1-2ce311b70103",
+    "name": "Masonic Pin – Square & Compass",
+    "category": "accessories",
+    "subcategory": "pins",
+    "price": 250,
+    "description": "Finely crafted Masonic lapel pin with enamel finish.",
+    "image": null,
+    "featured": false,
+    "createdAt": "2026-09-25T03:28:59.840Z"
+  },
+  {
+    "id": "b3cd04d2-54c8-4cd7-a74a-20e4b1b5d0d5",
+    "name": "Masonic Ring – Blue Lodge",
+    "category": "accessories",
+    "subcategory": "rings",
+    "price": 3500,
+    "description": "Custom Masonic ring with lodge symbol, available in silver or gold.",
+    "image": null,
+    "featured": false,
+    "createdAt": "2026-09-25T03:28:59.840Z"
+  }
+]

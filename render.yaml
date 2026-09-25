@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: golden-lady
+    env: node
+    region: singapore
+    plan: free
+    rootDir: .
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: emandalican@icloud.com
+      - key: ADMIN_PASSWORD
+        value: GoldenLady@2024
+      - key: PORT
+        value: 4000
