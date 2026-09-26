@@ -1,91 +1,110 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
-const ORDER_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSd8sju-h1h5GT9OJmm7v8Z4zIipC4quc0-f74oed1rTGRWBQw/viewform?usp=publish-editor'
-
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => { setMobileOpen(false) }, [location])
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
+  const navLinks = [
+    { to: '/', label: 'Home', end: true },
+    { to: '/jewelry', label: 'Jewelry' },
+    { to: '/accessories', label: 'Accessories' },
+    { to: '/custom-orders', label: 'Custom Orders' },
+    { to: '/contact', label: 'Contact' },
+  ]
+
   return (
     <>
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
-        <div className="container">
-          <div className="header-inner">
-            {/* Brand */}
-            <Link to="/" className="brand-block">
-              {/* Placeholder — replace with actual logo at src/assets/brand/logo.png */}
-              <div className="brand-logo-placeholder">GL</div>
-              <div className="brand-text">
-                <span className="brand-name">Golden Lady</span>
-                <span className="brand-tagline">Fine Jewelry &amp; Accessories</span>
-              </div>
-            </Link>
+        <div className="header-inner">
+          {/* Brand lockup */}
+          <Link to="/" className="brand-block" onClick={() => setMobileOpen(false)}>
+            <div className="brand-badge">GL</div>
+            <div className="brand-text">
+              <span className="brand-name">Golden Lady</span>
+              <span className="brand-sub">Fine Jewelry &amp; Accessories</span>
+            </div>
+          </Link>
 
-            {/* Desktop Nav */}
-            <nav className={`main-nav${mobileOpen ? ' mobile-open' : ''}`}>
-              <NavLink to="/" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`} end>
-                Home
+          {/* Desktop nav */}
+          <nav className="main-nav" aria-label="Main navigation">
+            {navLinks.map(({ to, label, end }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+              >
+                {label}
+                {/* Active dot indicator */}
+                <span className="nav-active-dot" aria-hidden="true" />
               </NavLink>
+            ))}
+          </nav>
 
-              <div className="nav-item">
-                <NavLink to="/jewelry" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
-                  Jewelry
-                  <svg className="nav-chevron" viewBox="0 0 10 10" fill="none">
-                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                </NavLink>
-                <div className="nav-dropdown">
-                  <Link to="/jewelry/necklaces">Necklaces</Link>
-                  <Link to="/jewelry/rings">Rings</Link>
-                  <Link to="/jewelry/earrings">Earrings</Link>
-                  <Link to="/jewelry/pendants">Pendants</Link>
-                </div>
-              </div>
+          {/* CTA */}
+          <a
+            href="https://wa.me/639954889011"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="header-cta-btn"
+            aria-label="Order via WhatsApp"
+          >
+            Order Now
+          </a>
 
-              <div className="nav-item">
-                <NavLink to="/accessories" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
-                  Accessories
-                  <svg className="nav-chevron" viewBox="0 0 10 10" fill="none">
-                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                </NavLink>
-                <div className="nav-dropdown">
-                  <Link to="/accessories/pins">Pins</Link>
-                  <Link to="/accessories/rings">Rings</Link>
-                </div>
-              </div>
-
-              <NavLink to="/custom-orders" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
-                Custom Orders
-              </NavLink>
-
-              <NavLink to="/contact" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
-                Contact
-              </NavLink>
-            </nav>
-
-            {/* Mobile Burger */}
-            <button
-              className={`mobile-menu-btn${mobileOpen ? ' open' : ''}`}
-              onClick={() => setMobileOpen(v => !v)}
-              aria-label="Toggle menu"
-            >
-              <span /><span /><span />
-            </button>
-          </div>
+          {/* Mobile burger */}
+          <button
+            className={`mobile-menu-btn${mobileOpen ? ' open' : ''}`}
+            onClick={() => setMobileOpen(v => !v)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+          >
+            <span /><span /><span />
+          </button>
         </div>
-        <div className="header-gold-line" />
       </header>
+
+      {/* Mobile overlay nav */}
+      <nav
+        className={`mobile-nav-overlay${mobileOpen ? ' open' : ''}`}
+        aria-label="Mobile navigation"
+      >
+        {navLinks.map(({ to, label, end }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={end}
+            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
+            {label}
+          </NavLink>
+        ))}
+        <div style={{ marginTop: 48 }}>
+          <div style={{ fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 16 }}>Contact Us</div>
+          <a href="tel:+639954889011" style={{ display: 'block', color: 'var(--ivory-muted)', fontFamily: 'var(--font-sans)', fontSize: 14, marginBottom: 8 }}>
+            +63 995 488 9011
+          </a>
+          <a href="mailto:Goldenladyjewelry8@gmail.com" style={{ display: 'block', color: 'var(--ivory-muted)', fontFamily: 'var(--font-sans)', fontSize: 14 }}>
+            Goldenladyjewelry8@gmail.com
+          </a>
+        </div>
+      </nav>
     </>
   )
 }

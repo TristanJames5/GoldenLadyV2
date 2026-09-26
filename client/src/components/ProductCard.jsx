@@ -1,20 +1,11 @@
 import { getImageUrl, ORDER_FORM_URL } from '../utils/api'
 
-const JEWELRY_ICON = (
-  <svg viewBox="0 0 48 48" fill="none" className="product-placeholder-icon">
-    <path d="M24 8L32 18H16L24 8Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-    <path d="M16 18L20 38H28L32 18" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-    <path d="M20 38L24 42L28 38" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-  </svg>
-)
-
 export default function ProductCard({ product, featured = false }) {
   const imageUrl = getImageUrl(product.image)
 
   const handleOrder = (e) => {
     e.stopPropagation()
-    const formUrl = `${ORDER_FORM_URL}`
-    window.open(formUrl, '_blank', 'noopener,noreferrer')
+    window.open(ORDER_FORM_URL, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -24,24 +15,41 @@ export default function ProductCard({ product, featured = false }) {
           <img src={imageUrl} alt={product.name} loading="lazy" />
         ) : (
           <div className="product-placeholder">
-            {JEWELRY_ICON}
-            <span className="product-placeholder-text">Image Coming Soon</span>
+            <svg viewBox="0 0 48 48" fill="none" className="product-placeholder-icon">
+              <path d="M24 8L32 18H16L24 8Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+              <path d="M16 18L20 38H28L32 18" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+              <path d="M20 38L24 42L28 38" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+            </svg>
           </div>
         )}
-        {featured && <div className="product-badge">Featured</div>}
+        <div className="product-cat-badge">{product.subcategory || product.category}</div>
+        <div className="product-price-badge">₱{Number(product.price).toLocaleString()}</div>
+        {featured && (
+          <div
+            className="product-cat-badge"
+            style={{ top: 12, left: 'auto', right: 12, background: 'var(--gold)', border: 'none', color: 'var(--bg-primary)' }}
+          >
+            Featured
+          </div>
+        )}
+        <div className="product-hover-overlay" />
+        <button
+          className="product-order-cta"
+          onClick={handleOrder}
+          aria-label={`Order ${product.name}`}
+        >
+          Order Now
+        </button>
       </div>
       <div className="product-info">
-        <div className="product-sub">{product.subcategory}</div>
         <div className="product-name">{product.name}</div>
         {product.description && (
           <div className="product-desc">{product.description}</div>
         )}
-        <div className="product-price">
-          ₱{Number(product.price).toLocaleString()}
+        <div className="product-footer">
+          <div className="product-price">₱{Number(product.price).toLocaleString()}</div>
+          <button className="product-view-link" onClick={handleOrder}>View Details</button>
         </div>
-        <button className="btn-order" onClick={handleOrder}>
-          Order Now
-        </button>
       </div>
     </div>
   )

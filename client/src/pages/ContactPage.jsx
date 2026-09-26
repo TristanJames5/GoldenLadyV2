@@ -1,93 +1,117 @@
-export default function ContactPage() {
-  const contacts = [
-    {
-      icon: '📱',
-      label: 'Phone / Viber / WhatsApp',
-      value: '+63 995 488 9011',
-      href: 'tel:+639954889011',
-    },
-    {
-      icon: '✉️',
-      label: 'Email',
-      value: 'emandalican@icloud.com',
-      href: 'mailto:emandalican@icloud.com',
-    },
-    {
-      icon: '💬',
-      label: 'Viber',
-      value: '+63 995 488 9011',
-      href: 'viber://chat?number=+639954889011',
-    },
-    {
-      icon: '📲',
-      label: 'WhatsApp',
-      value: '+63 995 488 9011',
-      href: 'https://wa.me/639954889011',
-    },
-  ]
+import { ORDER_FORM_URL } from '../utils/api'
 
+const CONTACTS = [
+  { icon: '📞', label: 'Phone / Viber / WhatsApp', value: '+63 995 488 9011', href: 'tel:+639954889011' },
+  { icon: '✉️', label: 'Email', value: 'Goldenladyjewelry8@gmail.com', href: 'mailto:Goldenladyjewelry8@gmail.com' },
+  { icon: '📸', label: 'Instagram', value: '@GoldenLadyJewelry', href: 'https://instagram.com/GoldenLadyJewelry' },
+  { icon: '📘', label: 'Facebook', value: 'Golden Lady Jewelry', href: 'https://facebook.com/GoldenLadyJewelry' },
+]
+
+export default function ContactPage() {
   return (
     <>
-      <div className="page-hero">
-        <div className="page-hero-content">
-          <div className="section-label animate-in">We'd Love to Hear From You</div>
-          <h1 className="section-title animate-in" style={{marginBottom:0}}>
+      {/* Hero */}
+      <div className="page-hero" style={{ background: 'var(--cream)', borderBottom: '1px solid rgba(201,168,76,0.2)' }}>
+        <div className="container page-hero-content">
+          <div className="overline dark animate-in">We'd Love to Hear From You</div>
+          <h1 className="section-title animate-in" style={{ marginBottom: 0, color: '#1a1410' }}>
             <em>Contact</em> Us
           </h1>
-          <div className="gold-divider animate-in" style={{maxWidth:300,margin:'16px auto'}}>
-            <div className="gold-divider-icon" />
+          <div className="gem-divider animate-in" style={{ maxWidth: 200, margin: '16px auto' }}>
+            <div className="gem" style={{ background: 'rgba(201,168,76,0.8)' }} />
           </div>
-          <p className="section-body animate-in" style={{margin:'0 auto',textAlign:'center'}}>
-            Whether you have a question, want to place a custom order, or simply want
-            to know more about our pieces — we're here for you.
+          <p className="section-sub animate-in" style={{ margin: '0 auto', color: 'rgba(26,20,16,0.6)' }}>
+            Reach out via phone, Viber, WhatsApp, email, or our socials — we're here
+            to help you find or create the perfect piece.
           </p>
         </div>
       </div>
 
-      <section className="section">
+      {/* Contact Content */}
+      <section className="contact-section" style={{ paddingTop: 72 }}>
         <div className="container">
-          <div className="contact-grid">
-            {/* Contact cards */}
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}}>
-              {contacts.map(c => (
-                <a key={c.label} href={c.href} className="contact-card animate-in" style={{textDecoration:'none',display:'block'}}>
-                  <div className="contact-icon">{c.icon}</div>
-                  <div className="contact-label">{c.label}</div>
-                  <div className="contact-value">{c.value}</div>
-                </a>
-              ))}
-            </div>
-
-            {/* Info panel */}
-            <div className="animate-in" style={{paddingLeft:8}}>
-              <div className="section-label">How We Work</div>
-              <h2 className="section-title" style={{fontSize:'1.8rem'}}>
-                Simple, <em>personal</em> service
-              </h2>
-              <div className="gold-divider"><div className="gold-divider-icon"/></div>
-              <div style={{display:'flex',flexDirection:'column',gap:20,marginTop:8}}>
-                {[
-                  {step:'01',text:"Click 'Order Now' on any product"},
-                  {step:'02',text:'Fill in your details on the order form'},
-                  {step:'03',text:'We contact you via Viber or Messenger'},
-                  {step:'04',text:'Arrange payment (GCash, PayMaya, Bank Transfer)'},
-                  {step:'05',text:'We ship your order directly to you'},
-                ].map(s => (
-                  <div key={s.step} style={{display:'flex',gap:16,alignItems:'flex-start'}}>
-                    <div style={{
-                      fontFamily:'var(--font-display)',fontWeight:700,fontSize:'1.1rem',
-                      color:'var(--gold)',opacity:0.6,flexShrink:0,width:28
-                    }}>{s.step}</div>
-                    <div style={{color:'var(--charcoal-light)',lineHeight:1.7}}>{s.text}</div>
-                  </div>
+          <div className="contact-layout" style={{ marginTop: 0 }}>
+            {/* Left — contact cards */}
+            <div>
+              <div className="overline dark animate-in" style={{ marginBottom: 24 }}>Reach Us</div>
+              <div className="contact-cards-grid animate-in">
+                {CONTACTS.map(c => (
+                  <a
+                    key={c.label}
+                    href={c.href}
+                    className="contact-card"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="contact-card-icon">{c.icon}</div>
+                    <div className="contact-card-label">{c.label}</div>
+                    <div className="contact-card-value">{c.value}</div>
+                  </a>
                 ))}
               </div>
 
-              <div style={{marginTop:36,padding:'24px 28px',borderLeft:'2px solid var(--gold)',background:'rgba(201,168,76,0.05)'}}>
-                <div className="section-label" style={{marginBottom:6}}>Payment Methods</div>
-                <p style={{color:'var(--text-muted)',fontSize:'0.9rem',lineHeight:1.8}}>
-                  GCash &bull; PayMaya &bull; Bank Transfer
-                </p>
+              {/* Store info */}
+              <div style={{ marginTop: 32 }} className="animate-in">
+                <div className="overline dark" style={{ marginBottom: 16 }}>Our Store</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {[
+                    { label: 'Location', value: '2nd Floor, Bldg A, SM Megamall\nWack-Wack Greenhills, Mandaluyong City\nMetro Manila, Philippines' },
+                    { label: 'Hours', value: 'Mon – Sun, 10:00 AM – 8:00 PM' },
+                  ].map(r => (
+                    <div key={r.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+                      <span style={{ fontFamily: 'var(--font-sans)', fontSize: 9, fontWeight: 500, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold-dark)', minWidth: 80, paddingTop: 2 }}>
+                        {r.label}
+                      </span>
+                      <span style={{ fontFamily: 'var(--font-sans)', fontSize: 14, color: 'rgba(26,20,16,0.88)', whiteSpace: 'pre-line', lineHeight: 1.6 }}>
+                        {r.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right — process */}
+            <div className="animate-in">
+              <div className="overline dark">How We Work</div>
+              <h2 className="contact-right-title">
+                Simple, <em>personal</em> service
+              </h2>
+              <div className="process-divider">
+                <div className="gem" />
+              </div>
+              <div className="timeline">
+                {[
+                  'Click Order Now on any product',
+                  'Fill in your details and preferences',
+                  'We contact you via Viber or Messenger',
+                  'Arrange payment securely',
+                  'We ship directly to you',
+                ].map((step, i, arr) => (
+                  <div key={i} className="timeline-step">
+                    <div className="timeline-left">
+                      <div className="timeline-circle">{i + 1}</div>
+                      {i < arr.length - 1 && <div className="timeline-connector" />}
+                    </div>
+                    <div className="timeline-text">{step}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="payment-block">
+                <div className="payment-label">Payment Methods</div>
+                <div className="payment-methods">GCash • PayMaya • Bank Transfer</div>
+              </div>
+
+              <div style={{ marginTop: 32 }}>
+                <a
+                  href={ORDER_FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  style={{ display: 'inline-flex', background: '#C9A84C', color: '#0c0a07' }}
+                >
+                  Place an Order
+                </a>
               </div>
             </div>
           </div>

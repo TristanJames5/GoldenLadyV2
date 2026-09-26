@@ -1,94 +1,122 @@
 import { Link } from 'react-router-dom'
+import { ORDER_FORM_URL } from '../utils/api'
 
-const STEPS = [
-  { num: '01', text: 'Send us your idea or a photo of what you want' },
-  { num: '02', text: "We'll discuss materials, design, and price" },
-  { num: '03', text: 'We create a wax model for your approval' },
-  { num: '04', text: 'We craft your piece and deliver it to you' },
-]
+const GemDivider = () => (
+  <div className="gem-divider"><div className="gem" /></div>
+)
 
 const SERVICES = [
-  { icon: '💍', title: 'Ring Restoration', desc: 'A ring restored to its former glory' },
-  { icon: '⚜️', title: 'Masonic Rings', desc: "Custom Masonic ring with your lodge's symbol" },
-  { icon: '🎓', title: 'College Rings', desc: 'A college ring with your school crest' },
-  { icon: '💒', title: 'Wedding Rings', desc: 'Customize wedding rings for your special day' },
+  { num: '01', title: 'Ring Restoration', desc: 'Breathe new life into a treasured ring. We repair, resize, re-stone, and refinish with expert precision.' },
+  { num: '02', title: 'Masonic Rings', desc: 'Precision-crafted Masonic rings with meaningful symbols rendered in gold or silver — built to last generations.' },
+  { num: '03', title: 'College Rings', desc: 'Celebrate academic milestones with a custom class ring that captures your achievement forever.' },
+  { num: '04', title: 'Wedding Rings', desc: 'Your love story deserves a ring as unique as your journey — beautifully handcrafted, just for you.' },
 ]
 
 export default function CustomOrdersPage() {
   return (
     <>
       <div className="page-hero">
-        <div className="page-hero-content">
-          <div className="section-label animate-in">Bespoke</div>
-          <h1 className="section-title animate-in" style={{marginBottom:0}}>
-            Custom Jewelry,<br /><em>Made for You</em>
+        <div className="container page-hero-content">
+          <div className="overline animate-in">Bespoke</div>
+          <h1 className="section-title animate-in" style={{ marginBottom: 0 }}>
+            Custom <em>Orders</em>
           </h1>
-          <div className="gold-divider animate-in" style={{maxWidth:300,margin:'16px auto'}}>
-            <div className="gold-divider-icon" />
+          <div className="gem-divider animate-in" style={{ maxWidth: 200, margin: '16px auto' }}>
+            <div className="gem" />
           </div>
+          <p className="section-sub animate-in" style={{ margin: '0 auto' }}>
+            Your vision, our craft. We create bespoke jewelry tailored to your story,
+            made with the finest materials and attention to detail.
+          </p>
         </div>
       </div>
 
-      <section className="section">
+      {/* Services */}
+      <section className="inner-section">
         <div className="container">
-          <div className="custom-page">
-            <p className="section-body animate-in" style={{maxWidth:'100%',fontSize:'1.15rem'}}>
-              At Golden Lady, we don't just sell jewelry — we create it. Whether you need
-              something restored, designed from scratch, or personalized to perfection,
-              we work with you from concept to completion. Every piece is handcrafted with care.
-            </p>
+          <div className="section-head animate-in">
+            <div className="overline">What We Create</div>
+            <h2 className="section-title">
+              Our <em>Specialties</em>
+            </h2>
+            <GemDivider />
+          </div>
 
-            {/* What we offer */}
-            <div style={{marginTop:56}}>
-              <div className="section-label animate-in">What We Create</div>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:24,marginTop:24}}>
-                {SERVICES.map(s => (
-                  <div key={s.title} className="step-card animate-in">
-                    <div style={{fontSize:'2rem',marginBottom:12}}>{s.icon}</div>
-                    <div style={{fontFamily:'var(--font-display)',fontSize:'1rem',fontWeight:700,color:'var(--charcoal)',marginBottom:8}}>
-                      {s.title}
-                    </div>
-                    <div className="step-text">{s.desc}</div>
-                  </div>
-                ))}
+          <div className="how-it-works">
+            {SERVICES.map(s => (
+              <div key={s.num} className="step-card animate-in">
+                <div className="step-num">{s.num}</div>
+                <div className="service-title" style={{ marginBottom: 8 }}>{s.title}</div>
+                <div className="step-text">{s.desc}</div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* How it works */}
-            <div style={{marginTop:64}}>
-              <div className="section-label animate-in">How It Works</div>
-              <h2 className="section-title animate-in">
-                Your journey to a<br /><em>perfect piece</em>
+      {/* Process + CTA */}
+      <section className="custom-section">
+        <div className="container">
+          <div className="custom-grid">
+            <div className="animate-in">
+              <div className="overline">How It Works</div>
+              <h2 className="custom-left-title">
+                <span className="line-ivory">Simple, personal</span><br />
+                <span className="line-gold">service</span>
               </h2>
-              <div className="how-it-works">
-                {STEPS.map(s => (
-                  <div key={s.num} className="step-card animate-in">
-                    <div className="step-num">{s.num}</div>
-                    <div className="step-text">{s.text}</div>
+              <div className="custom-rule" />
+              <p className="custom-body">
+                We keep the process simple so you can focus on the vision.
+                Our team walks you through every step, ensuring the final piece
+                is exactly what you imagined — or even better.
+              </p>
+
+              <div className="timeline" style={{ marginBottom: 32 }}>
+                {[
+                  'Click Order Now on any product or use our Order Form',
+                  'Fill in your details and describe your design',
+                  'We contact you via Viber or Messenger to refine details',
+                  'Arrange payment via GCash, PayMaya, or Bank Transfer',
+                  'We handcraft and ship directly to you',
+                ].map((step, i, arr) => (
+                  <div key={i} className="timeline-step">
+                    <div className="timeline-left">
+                      <div
+                        className="timeline-circle"
+                        style={{ borderColor: 'var(--gold)', color: 'var(--gold)', background: 'rgba(201,168,76,0.1)' }}
+                      >
+                        {i + 1}
+                      </div>
+                      {i < arr.length - 1 && <div className="timeline-connector" />}
+                    </div>
+                    <div className="timeline-text" style={{ color: 'var(--ivory-muted)', paddingBottom: 22 }}>
+                      {step}
+                    </div>
                   </div>
                 ))}
               </div>
+
+              <a
+                href={ORDER_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+                style={{ display: 'inline-flex' }}
+              >
+                Start Custom Order
+              </a>
             </div>
 
-            {/* CTA */}
-            <div className="animate-in" style={{
-              marginTop:64,textAlign:'center',padding:'56px 40px',
-              background:'var(--charcoal)',position:'relative',overflow:'hidden'
-            }}>
-              <div style={{
-                position:'absolute',inset:0,
-                background:'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.12), transparent)'
-              }} />
-              <div style={{position:'relative',zIndex:1}}>
-                <div style={{fontFamily:'var(--font-display)',fontSize:'1.5rem',color:'var(--cream)',marginBottom:12}}>
-                  Ready to create something special?
-                </div>
-                <p style={{color:'rgba(250,246,239,0.6)',marginBottom:28,fontStyle:'italic'}}>
-                  Send us a message and let's begin.
-                </p>
-                <Link to="/contact" className="btn-primary">
-                  <span>Get in Touch</span>
-                </Link>
+            <div className="custom-image-col animate-in">
+              <img
+                src="/catalog/Rings__Wedding_ring_2.png"
+                alt="Custom jewelry crafting"
+              />
+              <div className="custom-image-frame" aria-hidden="true" />
+              <div className="custom-image-fade" aria-hidden="true" />
+              <div className="custom-stat-badge">
+                <div className="custom-stat-num">100%</div>
+                <div className="custom-stat-label">Handcrafted<br />Every Piece</div>
               </div>
             </div>
           </div>
