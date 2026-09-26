@@ -41,7 +41,7 @@ export default function DashboardPage() {
       <div className="card">
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:20}}>
           <div className="card-title" style={{marginBottom:0}}>Recent Products</div>
-          <button className="btn btn-gold btn-sm" onClick={() => navigate('/admin/products')}>
+          <button className="btn btn-gold btn-sm" onClick={() => navigate('/products')}>
             Manage All
           </button>
         </div>

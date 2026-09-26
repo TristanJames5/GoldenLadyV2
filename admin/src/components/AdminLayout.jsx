@@ -3,7 +3,7 @@ import { useAuth } from '../App'
 
 const NAV = [
   {
-    path: '/admin',
+    path: '/',
     label: 'Dashboard',
     exact: true,
     icon: (
@@ -16,7 +16,7 @@ const NAV = [
     )
   },
   {
-    path: '/admin/products',
+    path: '/products',
     label: 'Products',
     exact: false,
     icon: (

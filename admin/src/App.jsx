@@ -48,7 +48,7 @@ function AuthProvider({ children }) {
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
-  if (!user) return <Navigate to="/admin/login" replace />
+  if (!user) return <Navigate to="/login" replace />
   return children
 }
 
@@ -57,10 +57,10 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/admin/login" element={<LoginPage />} />
-          <Route path="/admin" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-          <Route path="/admin/products" element={<ProtectedRoute><ProductsPage /></ProtectedRoute>} />
-          <Route path="*" element={<Navigate to="/admin" replace />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+          <Route path="/products" element={<ProtectedRoute><ProductsPage /></ProtectedRoute>} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

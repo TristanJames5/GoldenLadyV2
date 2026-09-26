@@ -16,7 +16,7 @@ export default function LoginPage() {
     setLoading(true)
     try {
       await login(email, password)
-      navigate('/admin')
+      navigate('/')
     } catch (err) {
       setError(err.message || 'Invalid credentials')
     } finally {
